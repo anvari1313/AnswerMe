@@ -6,8 +6,17 @@
  */
 
 module.exports = {
-	_new : function (req, res) {
+	'new' : function (req, res) {
 	  return res.view('question/new');
-  }
+  },
+
+  index:function (req, res) {
+
+  },
+
+  'question':function (req, res) {
+
+  },
+
 };
 
