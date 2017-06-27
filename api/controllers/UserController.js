@@ -30,8 +30,10 @@ module.exports = {
 
   login: function (req, res) {
     User.find({email: req.params.all().email}, function (err, user) {
-      console.log(JSON.stringify(user));
-      console.log(req.params.all().password);
+      var enteredPassword = req.params.all().password;
+      var userPassword = user.password;
+      console.log(enteredPassword);
+      console.log(userPassword);
       bcrypt.compare(req.params.all().password, user.password, function (err, valid) {
         console.log(err);
         console.log(valid);
@@ -67,7 +69,6 @@ module.exports = {
   },
 
   profilePic: function (req, res) {
-    console.log(req.param('username'));
     var path = sails.config.appPath+'/assets/images/avatars/' + req.param('username') + '.png';
 
     fs.exists(path, function(exists) {
