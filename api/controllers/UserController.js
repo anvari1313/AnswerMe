@@ -1,4 +1,5 @@
 var bcrypt = require('bcrypt');
+var fs = require('fs');
 
 /**
  * UserController
@@ -61,6 +62,21 @@ module.exports = {
           res.redirect('/');
         }
       }
+    });
+
+  },
+
+  profilePic: function (req, res) {
+    console.log(req.param('username'));
+    var path = sails.config.appPath+'/assets/images/avatars/' + req.param('username') + '.png';
+
+    fs.exists(path, function(exists) {
+      if (exists){
+        fs.createReadStream(path).pipe(res);
+      }else{
+        fs.createReadStream(sails.config.appPath+'/assets/images/avatars/defaultAvatar.png').pipe(res);
+      }
+
     });
 
   }
