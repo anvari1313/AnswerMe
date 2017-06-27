@@ -36,6 +36,10 @@ module.exports.routes = {
 
   'get /register': {view:'user/new'},
   'post /register': 'UserController.register',
+  'get /login':{view: 'user/login'},
+  'post /login':'UserController.login',
+  'get /logout':'UserController.logout',
+
   'get /users': 'UserController.listAll',
   'get /users/:userId' : 'UserController.profile',
 
