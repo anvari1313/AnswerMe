@@ -34,7 +34,7 @@ module.exports.routes = {
 
   'get /': 'HomeController.index',
 
-  'get /register': {view:'user/new'},
+  'get /register': {view:'user/registration'},
   'post /register': 'UserController.register',
   'get /login':{view: 'user/login'},
   'post /login':'UserController.login',
