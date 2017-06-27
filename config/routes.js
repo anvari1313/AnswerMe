@@ -40,13 +40,20 @@ module.exports.routes = {
   'post /login':'UserController.login',
   'get /logout':'UserController.logout',
 
-  'get /users/:username/pic':'UserController.profilePic',
-
   'get /users': 'UserController.listAll',
-  'get /users/:userId' : 'UserController.profile',
 
-  'get /questions/new' : 'QuestionController._new'
+  'get /users/:username/pic':'UserController.profilePic',
+  'get /users/:username' : 'UserController.profile',
+  'get /users/:username/questions' : 'UserController.questions',
 
+  'get /questions/' : 'QuestionController.index',
+  'get /questions/new' : 'QuestionController.new',
+  'get /questions/:question_id' : 'QuestionController.question',
+  'post /questions/:question_id/new/answer' : 'AnswerController.new',
+
+  'post /answers/:answer_id/new/comment' : 'AnswerController.addComment',
+
+  'get /kossher':{ view:''}
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
