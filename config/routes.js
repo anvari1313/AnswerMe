@@ -40,6 +40,8 @@ module.exports.routes = {
   'post /login':'UserController.login',
   'get /logout':'UserController.logout',
 
+  'get /users/:username/pic':'UserController.profilePic',
+
   'get /users': 'UserController.listAll',
   'get /users/:userId' : 'UserController.profile',
 
