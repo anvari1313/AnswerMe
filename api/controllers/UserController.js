@@ -52,7 +52,7 @@ module.exports = {
   register: function (req, res) {
     var form = req.params.all();
 
-    User.create({name:form.name, email:form.email, password:form.password}, function (err, result) {
+    User.create({fname:form.first_name, lname:form.last_name, username: form.username, email:form.email, password:form.password}, function (err, result) {
       if (err)
         return res.view('500', {data:JSON.stringify(err)});
       else{
@@ -60,7 +60,7 @@ module.exports = {
           return res.view('500', {data:JSON.stringify(result)});
         else {
           req.session.authenticated = true;
-          req.session.user = {name:form.name, email:form.email};
+          req.session.user = {fname:result.fname, lname: result.lname ,email:result.email, username: result.username};
           res.redirect('/');
         }
       }
