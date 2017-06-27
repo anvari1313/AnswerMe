@@ -30,6 +30,9 @@ module.exports.policies = {
 
   QuestionController:{
     _new:'isAuthenticated'
+  },
+  UserController:{
+    listAll:'testPolicy'
   }
   /***************************************************************************
   *                                                                          *
