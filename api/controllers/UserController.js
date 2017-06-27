@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt');
+
 /**
  * UserController
  *
@@ -18,17 +20,46 @@ module.exports = {
         return res.json(users);
     });
   },
+
+  logout: function (req, res) {
+    req.session.authenticated = false;
+    req.session.user = undefined;
+    res.redirect('/');
+  },
+
+  login: function (req, res) {
+    User.find({email: req.params.all().email}, function (err, user) {
+      console.log(JSON.stringify(user));
+      console.log(req.params.all().password);
+      bcrypt.compare(req.params.all().password, user.password, function (err, valid) {
+        console.log(err);
+        console.log(valid);
+        if(err)
+          return res.view('500', {data: err});
+
+        if (!valid) return;
+
+        req.session.authenticated = true;
+        req.session.user = user;
+        res.redirect('/');
+      })
+    });
+  },
+
   register: function (req, res) {
     var form = req.params.all();
 
-    User.create({name:form.name, email:form.email, encryptedPassword:form.password}, function (result, err) {
+    User.create({name:form.name, email:form.email, password:form.password}, function (err, result) {
       if (err)
-        return res.view('500', {data:err});
+        return res.view('500', {data:JSON.stringify(err)});
       else{
         if (result.error)
-          return res.view('500', {data:result});
-        else
-          return res.json(result);
+          return res.view('500', {data:JSON.stringify(result)});
+        else {
+          req.session.authenticated = true;
+          req.session.user = {name:form.name, email:form.email};
+          res.redirect('/');
+        }
       }
     });
 
