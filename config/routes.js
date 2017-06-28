@@ -55,7 +55,7 @@ module.exports.routes = {
 
   'post /answers/:answer_id/new/comment' : 'AnswerController.addComment',
 
-  'get /kossher':{ view:'question/index'},
+  'get /kossher':{ view:'question/singleQuestion'},
 
   'get /koskalak':{ view:'question/beforeNew'}
   /***************************************************************************
