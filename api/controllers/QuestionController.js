@@ -6,8 +6,18 @@
  */
 
 module.exports = {
+
 	'new' : function (req, res) {
-	  return res.view('question/new');
+	  console.log(req.user.fname);
+	  var tags = [];
+	  if (req.query.tag)
+	    tags = req.query.tag;
+	  return res.view('question/new', {tags: tags});
+  },
+
+  'create': function (req, res) {
+	  var question = req.params.all();
+	  Question.create({title:question.title})
   },
 
   index:function (req, res) {
@@ -16,7 +26,7 @@ module.exports = {
 
   'question':function (req, res) {
 
-  },
+  }
 
 };
 
