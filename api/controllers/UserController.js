@@ -9,7 +9,20 @@ var fs = require('fs');
  */
 
 module.exports = {
-  profile: function (req, res) {
+  profile: function (req, res, next) {
+    var username = req.param(req.username);
+    User.find({username: username}, function (err, user) {
+      if (err)
+        return res.view('500', {data: err});
+      else {
+        if (!user) {
+          next();
+        }else{
+
+          return res.view('user/profile', {user: user});
+        }
+      }
+    });
     return res.view('user/profile', {user: {userId: req.param('userId'), userName: 'User name'}});
   },
 
@@ -103,7 +116,7 @@ module.exports = {
 
   questions: function (req, res) {
 
-  },
+  }
 
 
 };
