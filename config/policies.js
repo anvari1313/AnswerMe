@@ -30,7 +30,8 @@ module.exports.policies = {
 
   QuestionController:{
     'new':['isAuthenticated'],
-    'create':['isAuthenticated']
+    'create':['isAuthenticated'],
+    'newComment': ['isAuthenticated']
   },
 
   AnswerController:{
