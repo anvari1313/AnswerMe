@@ -51,7 +51,9 @@ module.exports.routes = {
   'get /questions/new' : 'QuestionController.new',
   'post /questions/new' : 'QuestionController.create',
   'get /questions/:question_id' : 'QuestionController.question',
-  'post /questions/:question_id/new/answer' : 'AnswerController.new',
+  'post /questions/:question_id/new/comment' : 'QuestionController.newComment',
+
+  'post /questions/:question_id/new/answer' : 'AnswerController.create',
 
   'post /answers/:answer_id/new/comment' : 'AnswerController.addComment',
 
