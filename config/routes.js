@@ -46,6 +46,7 @@ module.exports.routes = {
   'get /users/:username' : 'UserController.profile',
   'get /users/:username/questions' : 'UserController.questions',
 
+
   'get /questions/' : 'QuestionController.index',
   'get /questions/new' : 'QuestionController.new',
   'get /questions/:question_id' : 'QuestionController.question',
