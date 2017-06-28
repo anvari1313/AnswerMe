@@ -31,7 +31,14 @@ module.exports = {
   },
 
   index:function (req, res) {
-
+	  console.log('this');
+	  Question.find().exec(function (err, questions) {
+      if (err)
+        return res.view('500', {data:err});
+      else{
+        return res.view('question/index',{questions:questions});
+      }
+    });
   },
 
   'question':function (req, res) {
