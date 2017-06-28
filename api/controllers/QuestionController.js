@@ -18,8 +18,6 @@ module.exports = {
   'create': function (req, res) {
 
     var question = req.params.all();
-
-    console.log();
     Question.create({
       title: question.title,
       tags: question.tags.split(','),
