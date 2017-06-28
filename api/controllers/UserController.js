@@ -10,7 +10,7 @@ var fs = require('fs');
 
 module.exports = {
   profile: function (req, res) {
-    return res.view('user/profile',{user:{userId:req.param('userId'), userName:'User name'}});
+    return res.view('user/profile', {user: {userId: req.param('userId'), userName: 'User name'}});
   },
 
   listAll: function (req, res) {
@@ -29,38 +29,57 @@ module.exports = {
   },
 
   login: function (req, res) {
-    User.find({email: req.params.all().email}, function (err, user) {
-      var enteredPassword = req.params.all().password;
-      var userPassword = user.password;
-      console.log(enteredPassword);
-      console.log(userPassword);
-      bcrypt.compare(req.params.all().password, user.password, function (err, valid) {
-        console.log(err);
-        console.log(valid);
-        if(err)
+    var form = req.params.all();
+    if (form.email && form.password){
+      User.findOne({email: req.params.all().email}, function (err, user) {
+        if (err)
           return res.view('500', {data: err});
 
-        if (!valid) return;
+        if (user){
+          var enteredPassword = form.password;
+          var userPassword = user.password;
+          console.log(enteredPassword);
+          console.log(userPassword);
 
-        req.session.authenticated = true;
-        req.session.user = user;
-        res.redirect('/');
-      })
-    });
+          bcrypt.compare(enteredPassword, userPassword, function (err, valid) {
+            if (err)
+              return res.view('500', {data: err});
+
+            console.log(valid);
+            if (!valid) return res.redirect('/login');
+
+            req.session.authenticated = true;
+            req.session.user = user;
+            res.redirect('/');
+          });
+        }else{
+          return res.redirect('/login')
+        }
+
+
+      });
+    }
+
   },
 
   register: function (req, res) {
     var form = req.params.all();
 
-    User.create({fname:form.first_name, lname:form.last_name, username: form.username, email:form.email, password:form.password}, function (err, result) {
+    User.create({
+      fname: form.first_name,
+      lname: form.last_name,
+      username: form.username,
+      email: form.email,
+      password: form.password
+    }, function (err, result) {
       if (err)
-        return res.view('500', {data:JSON.stringify(err)});
-      else{
+        return res.view('500', {data: JSON.stringify(err)});
+      else {
         if (result.error)
-          return res.view('500', {data:JSON.stringify(result)});
+          return res.view('500', {data: JSON.stringify(result)});
         else {
           req.session.authenticated = true;
-          req.session.user = {fname:result.fname, lname: result.lname ,email:result.email, username: result.username};
+          req.session.user = {fname: result.fname, lname: result.lname, email: result.email, username: result.username};
           res.redirect('/');
         }
       }
@@ -69,23 +88,22 @@ module.exports = {
   },
 
   profilePic: function (req, res) {
-    var path = sails.config.appPath+'/assets/images/avatars/' + req.param('username') + '.png';
+    var path = sails.config.appPath + '/assets/images/avatars/' + req.param('username') + '.png';
 
-    fs.exists(path, function(exists) {
-      if (exists){
+    fs.exists(path, function (exists) {
+      if (exists) {
         fs.createReadStream(path).pipe(res);
-      }else{
-        fs.createReadStream(sails.config.appPath+'/assets/images/avatars/defaultAvatar.png').pipe(res);
+      } else {
+        fs.createReadStream(sails.config.appPath + '/assets/images/avatars/defaultAvatar.png').pipe(res);
       }
 
     });
 
   },
 
-  questions:function (req, res) {
+  questions: function (req, res) {
 
   },
-
 
 
 };
