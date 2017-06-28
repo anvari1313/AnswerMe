@@ -16,8 +16,18 @@ module.exports = {
   },
 
   'create': function (req, res) {
+
 	  var question = req.params.all();
-	  Question.create({title:question.title})
+
+	  console.log();
+    Question.create({title:question.title, tags:question.tags.split(','), text:question.text, asker:req.user}, function (err, result) {
+      if (err)
+        return res.json(err);
+      else
+        return res.json(result);
+    });
+
+    // return res.json({que:question, user: req.user});
   },
 
   index:function (req, res) {
