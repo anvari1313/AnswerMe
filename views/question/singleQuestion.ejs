@@ -62,7 +62,7 @@
   <%question.answers.forEach(function (answer, index) {%>
   <div id="answer" style="margin-left: 4%">
     <div class="card-block">
-      <h5 class="card-title">Answerer's name</h5>
+      <h5 class="card-title"> <%- answer.responser.lname%></h5>
       <div class="container">
         <p><%- answer.text%></p>
       </div>
