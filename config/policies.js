@@ -29,7 +29,8 @@ module.exports.policies = {
   // '*': true,
 
   QuestionController:{
-    new:['isAuthenticated']
+    'new':['isAuthenticated'],
+    'create':['isAuthenticated']
   }
   /***************************************************************************
   *                                                                          *
