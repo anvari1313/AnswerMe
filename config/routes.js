@@ -47,7 +47,7 @@ module.exports.routes = {
   'get /users/:username/questions' : 'UserController.questions',
 
 
-  'get /questions/' : 'QuestionController.index',
+  'get /questions' : 'QuestionController.index',
   'get /questions/new' : 'QuestionController.new',
   'post /questions/new' : 'QuestionController.create',
   'get /questions/:question_id' : 'QuestionController.question',
@@ -55,7 +55,7 @@ module.exports.routes = {
 
   'post /answers/:answer_id/new/comment' : 'AnswerController.addComment',
 
-  'get /kossher':{ view:'application/questions'},
+  'get /kossher':{ view:'question/index'},
 
   'get /koskalak':{ view:'question/beforeNew'}
   /***************************************************************************
