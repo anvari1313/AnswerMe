@@ -1,5 +1,5 @@
 <div class="container">
-  <% questions.forEach(function (question) { %>
+  <% questions.forEach(function (question, index) { %>
   <div class="card" style="margin: 1em;">
     <div class="card-block">
       <h4 class="card-title"><%- question.title%></h4>
@@ -9,8 +9,8 @@
         <%})%>
       </h6>
       <div class="container">
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Show question context</button>
-        <div id="demo1" class="collapse">
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%- index%>">Show question context</button>
+        <div id="demo<%- index%>" class="collapse">
           <%- question.text%>
         </div>
       </div>
