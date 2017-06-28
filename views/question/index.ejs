@@ -1,32 +1,21 @@
 <div class="container">
+  <% questions.forEach(function (question) { %>
   <div class="card" style="margin: 1em;">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Tag1, Tag2, Tag3</h6>
+      <h4 class="card-title"><%- question.title%></h4>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <% question.tags.forEach(function (tag) {%>
+        <span class="badge badge-primary"><%- tag%></span>
+        <%})%>
+      </h6>
       <div class="container">
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Show question context</button>
         <div id="demo1" class="collapse">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <%- question.text%>
         </div>
       </div>
       <a style="margin: 1em;" href="#" class="card-link">Show answers</a>
     </div>
   </div>
-  <div class="card" style="margin: 1em;">
-    <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Tag1, Tag2, Tag3</h6>
-      <div class="container">
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Show question context</button>
-        <div id="demo2" class="collapse">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
-      </div>
-      <a style="margin: 1em;" href="#" class="card-link">Show answers</a>
-    </div>
-  </div>
+  <%});%>
 </div>
