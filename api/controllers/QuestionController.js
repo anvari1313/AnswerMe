@@ -37,12 +37,27 @@ module.exports = {
         return res.view('500', {data:err});
       else{
         return res.view('question/index',{questions:questions});
+        // return res.json({questions:questions});
       }
     });
   },
 
-  'question':function (req, res) {
+  'question':function (req, res, next) {
+    var question_id = req.param('question_id');
+	  Question.findOne({id: question_id}).exec(function (err1, question) {
+	    Answer.find({question: question.id}).exec(function (err2, answers) {
+        if (err1 || err2)
+          return res.view('500', {data:err});
+        if (! question)
+          next();
+        else{
+          question.answers = answers;
+          return res.view('question/singleQuestion', {question: question});
+        }
 
+      });
+
+    });
   }
 
 };
