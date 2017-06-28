@@ -49,12 +49,11 @@ module.exports = {
   'question': function (req, res, next) {
     var question_id = req.param('question_id');
     Question.findOne({id: question_id}).exec(function (err1, question) {
-      console.log(question);
+
       if (!question){
-        console.log('thisthat');
         return next();
       }
-      console.log('log1');
+
       Answer.find({question: question.id}).exec(function (err2, answers) {
 
           if (err1 || err2)
@@ -71,7 +70,6 @@ module.exports = {
                   return res.view('500', {data: err});
                 else {
                   counter ++;
-                  console.log('thisismeeeeeeee');
                   answer.responser = user;
 
                   if (counter == answers.length){
@@ -89,6 +87,7 @@ module.exports = {
 
     });
   },
+
   newComment:function (req, res) {
 
   }
