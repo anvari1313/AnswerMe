@@ -6,9 +6,15 @@
  */
 
 module.exports = {
-
+  schema: true,
+  connection: 'someMongodbServer',
+  tableName: 'questions',
   attributes: {
-
+    title: {type: 'string', required: true},
+    tags: {type:'array', required: true},
+    text: {type:'text', required:true},
+    asker: {model: 'user'},
+    answers: {collection: 'answer', via : 'responser'}
   }
 };
 
