@@ -2,12 +2,17 @@
  * Created by ahmad on 6/21/17.
  */
 
-var jwt = require('express-jwt');
-
-var authCheck = jwt({
-  secret: new Buffer('M9U2yGV6aQbnjYYfilOq5fWPmsSHrX901GE089oodAKA_T81iqlDmqdIqxFVmq-5', 'base64'),
-  audience: 'hUu1jgzuo53obxy3Dm3hSuDzoXb1ezj4'
-});
 
 
-module.exports = authCheck;
+module.exports = function (req, res, next) {
+  // User is allowed, proceed to the next policy,
+  // or if this is the last policy, the controller
+  if (req.session.authenticated) {
+    req.user = req.session.user;
+    return next();
+  }
+
+  // User is not allowed
+  // (default res.forbidden() behavior can be overridden in `config/403.js`)
+  return res.redirect('/login');
+};
