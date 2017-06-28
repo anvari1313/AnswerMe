@@ -1,23 +1,32 @@
 <div class="container">
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
-  <h1>This is me</h1>
-  <h1><%= user.userId%></h1>
-  <h1><%= user.userName%></h1>
+  <h3>Profile</h3>
+
+  <!--
+
+  :username here
+
+  -->
+  <img style="margin-left: 45%;width: 10%;height: 10%;" src="/users/<%-user.username%>/pic" class="img-circle" alt="Cinque Terre" width="304" height="236" >
+  <br>
+  <br>
+  <h2><%-user.fname%></h2><h2><%-user.lname%></h2>
+  Your questions:
+  <div class="card" style="margin: 1em;">
+    <div class="card-block">
+      <h4 class="card-title"></h4>
+      <h6 class="card-subtitle mb-2 text-muted">
+        QESTION TITLE<br>
+        <div style="font-size: x-small;">        tag1,tag2,tag3</div>
+
+        <span class="badge badge-primary"></span>
+      </h6>
+      <div class="container">
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Show question context</button>
+        <div id="demo" class="collapse">
+          questas;dlfj;dlsa j;lkadsj ;lkja;sldkfj ;laksdjf;l kj;lsdakfj ;lkadjs;fl kjad;lsfkj ;lksdajf
+        </div>
+      </div>
+      <a style="margin: 1em;" href="/questions/" class="card-link">Show answers</a>
+    </div>
+  </div>
 </div>
