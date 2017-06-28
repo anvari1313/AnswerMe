@@ -16,7 +16,8 @@ module.exports = {
     username: {type: 'string', required: true, unique:true},
     email: {type: 'string', email: true, required: true, unique: true},
     password: {type: 'string'},
-    interests: {type:'array'}
+    interests: {type:'array'},
+    questions:{collection:'question', via:'asker'}
   },
   toJSON: function () {
     var obj = this.toObject();
