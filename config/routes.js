@@ -48,12 +48,13 @@ module.exports.routes = {
 
   'get /questions/' : 'QuestionController.index',
   'get /questions/new' : 'QuestionController.new',
+  'post /questions/new' : 'QuestionController.create',
   'get /questions/:question_id' : 'QuestionController.question',
   'post /questions/:question_id/new/answer' : 'AnswerController.new',
 
   'post /answers/:answer_id/new/comment' : 'AnswerController.addComment',
 
-  'get /kossher':{ view:''}
+  'get /kosher':{ view:'question/new'}
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
