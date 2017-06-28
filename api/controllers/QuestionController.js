@@ -40,6 +40,7 @@ module.exports = {
         return res.view('500', {data: err});
       else {
         return res.view('question/index', {questions: questions});
+
         // return res.json({questions:questions});
       }
     });
