@@ -10,6 +10,22 @@
   }
 </style>
 
+<div class="comments-list">
+  <div class="media" style="margin: 0.3 em">
+    <div class="row">
+      <a class="media-left" href="#">
+        <img src="http://lorempixel.com/40/40/people/1/">
+      </a>
+      <div class="media-body" style="margin: 0">
+        <h4 class="media-heading user_name">Baltej Singh</h4>
+        Wow! this is really great.
+        <p>
+          <small><a href="">Like</a> - <a href="">Share</a></small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   function sendAnswer() {
     var text = $('#answer-text').val();
@@ -19,6 +35,33 @@
     form_data.append('_csrf', '<%- _csrf%>')
     $.ajax({
         url: "/questions/<%- question.id%>/new/answer",
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         // Setting the data attribute of ajax with file_data
+        type: 'post'
+      }, function (data) {
+      }
+    ).fail(function (data) {
+      alert(JSON.stringify(data))
+    }).done(function (data) {
+      console.log(JSON.stringify(data))
+    });
+  }
+
+  function addCommentToQuestion(user, comment) {
+      $('#question-comment-container').append('');
+  }
+
+  function sendQuestionComment() {
+    var text = $('#question-comment').val();
+    var form_data = new FormData();
+
+    form_data.append('text', text);
+    form_data.append('_csrf', '<%- _csrf%>')
+    $.ajax({
+        url: "/questions/<%- question.id%>/new/comment",
         dataType: 'json',
         cache: false,
         contentType: false,
@@ -50,10 +93,30 @@
       <a style="margin: 1em;" href="#" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Show
         comments</a>
       <div id="demo1" class="collapse">
-        <p for="inputsm">Some comment</p>
-        <p for="inputsm">Some comment</p>
-        <p for="inputsm">Some comment</p>
-        <input class="form-control col-sm-10 input-sm" id="inputsm" type="text">
+        <div  class="container">
+          <div id="question-comment-container" class="col-md-12">
+
+            <div class="comments-list">
+              <div class="media" style="margin: 0.3 em">
+                <div class="row">
+                  <a class="media-left" href="#">
+                    <img src="http://lorempixel.com/40/40/people/1/">
+                  </a>
+                  <div class="media-body" style="margin: 0">
+                    <h4 class="media-heading user_name">Baltej Singh</h4>
+                    Wow! this is really great.
+                    <p>
+                      <small><a href="">Like</a> - <a href="">Share</a></small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 0.5em;">
+              <input class="form-control col-sm-10 input-sm" id="question-comment" type="text">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
