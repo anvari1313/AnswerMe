@@ -29,7 +29,7 @@ module.exports = {
 
   },
 
-  addComment:function (req, res) {
+  newComment:function (req, res) {
 
   }
 
