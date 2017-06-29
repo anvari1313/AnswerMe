@@ -10,20 +10,24 @@ var fs = require('fs');
 
 module.exports = {
   profile: function (req, res, next) {
-    var username = req.param(req.username);
-    User.find({username: username}, function (err, user) {
+    var username = req.param('username');
+    User.findOne({username: username}, function (err, user) {
       if (err)
         return res.view('500', {data: err});
       else {
         if (!user) {
           next();
         }else{
+          var filteredUser = {};
+          filteredUser.fname = user.fname;
+          filteredUser.lname = user.lname;
+          filteredUser.email = user.email;
 
-          return res.view('user/profile', {user: user});
+          return res.view('user/profile', {user: filteredUser});
         }
       }
     });
-    return res.view('user/profile', {user: {userId: req.param('userId'), userName: 'User name'}});
+    // return res.view('user/profile', {user: {userId: req.param('userId'), userName: 'User name'}});
   },
 
   listAll: function (req, res) {
