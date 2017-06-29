@@ -7,7 +7,6 @@
 
 module.exports = {
 	index:function (req, res) {
-	  console.log('this function');
     return res.view('homepage');
   }
 };
