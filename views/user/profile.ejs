@@ -7,9 +7,20 @@
 
   -->
   <img style="margin-left: 45%;width: 10%;height: 10%;" src="/users/<%-user.username%>/pic" class="img-circle" alt="Cinque Terre" width="304" height="236" >
-  <br>
-  <br>
-  <h2><%-user.fname%></h2><h2><%-user.lname%></h2>
+
+  <div class="card">
+    <div class="card-header">
+      Personal Information
+    </div>
+    <div class="card-block">
+      <h4><%-user.fname%> <%-user.lname%></h4>
+      <h5 style="color: #cccccc"><%-user.username%></h5>
+      <%if(user.email){%>
+      <p><%-user.email%></p>
+      <%}%>
+    </div>
+  </div>
+
   Your questions:
   <div class="card" style="margin: 1em;">
     <div class="card-block">
