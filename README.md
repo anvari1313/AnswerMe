@@ -1,3 +1,3 @@
 # AnswerMe
 
-a [Sails](http://sailsjs.org) application
+AnswerMe is a general online question answering forum.
